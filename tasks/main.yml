@@ -22,3 +22,8 @@
 
 - include: dashboards.yml
   when: grafana_dashboards != []
+
+- meta: flush_handlers
+
+- include: tests.yml
+  when: fresh_install.changed

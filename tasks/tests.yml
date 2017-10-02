@@ -1,0 +1,40 @@
+- name: Check if grafana home dir exists
+  stat:
+    path: /etc/grafana
+  register: st
+  failed_when: st.stat.exists != True
+
+- name: Check if grafana conf file exists
+  stat:
+    path: /etc/grafana/grafana.ini
+  register: st
+  failed_when: st.stat.exists != True
+
+- name: Check if grafana logs dir exists
+  stat:
+    path: "{{ grafana_logs_dir }}"
+  register: st
+  failed_when: st.stat.exists != True
+
+- name: Check if grafana data dir exists
+  stat:
+    path: "{{ grafana_data_dir }}"
+  register: st
+  failed_when: st.stat.exists != True
+
+- name: Check if grafana dashboards dir exists
+  stat:
+    path: "{{ grafana_data_dir }}/dashboards"
+  register: st
+  failed_when: st.stat.exists != True
+
+- name: Check if grafana plugins dir exists
+  stat:
+    path: "{{ grafana_data_dir }}/plugins"
+  register: st
+  failed_when: st.stat.exists != True
+
+- name: Check if grafana is running
+  uri:
+    url: "http://{{ grafana_address }}:{{ grafana_port }}"
+    status_code: 200,403
