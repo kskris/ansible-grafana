@@ -37,4 +37,4 @@
 - name: Check if grafana is running
   uri:
     url: "http://{{ grafana_address }}:{{ grafana_port }}"
-    status_code: 200,403
+    status_code: 200,401
